@@ -13,11 +13,14 @@
   --second-background-color: #f5f4fa;
   --dark-background-color: #2f303a;
   --accent-color: #2196f3;
-  --opasity-lite-color: rgba(255, 255, 255, 0.6);
+  --opasity-light-color: rgba(255, 255, 255, 0.6);
   --border-color: #eeeeee;
-  --border-header--color: #ececec;
+  --border-header-color: #ececec;
   --social-links-color: #afb1b8;
   --opasity-dark-color: rgba(255, 255, 255, 0.1);
+  --work-label-background: rgba(47, 48, 58, 0.8);
+  --port-overlay-color: rgba(33, 150, 243, 0.9);
+  --backdrop-bg-color: rgba(0, 0, 0, 0.2);
   /* --number: 3; */
 }
 
@@ -74,7 +77,7 @@ body {
 /* Header */
 
 header {
-  border-bottom: 1px solid var(--border-header--color);
+  border-bottom: 1px solid var(--border-header-color);
 }
 /* Navi */
 /* Logo */
@@ -120,17 +123,35 @@ nav {
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .site-nav .link:hover,
 .site-nav .link:focus {
   color: var(--accent-color);
+  cursor: pointer;
 }
 
 .site-nav .link.current {
   color: var(--accent-color);
 }
+.current {
+  position: relative;
+}
+.current::after {
+  content: "";
 
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
+}
 /* mail, tel */
 
 .contact-list {
@@ -161,6 +182,8 @@ nav {
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contact-icon {
   fill: currentColor;
@@ -199,6 +222,7 @@ nav {
   margin-bottom: 30px;
 }
 /* Hero Button */
+
 .hero-button {
   display: block;
   margin: 0 auto;
@@ -216,12 +240,71 @@ nav {
   cursor: pointer;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .hero-button:hover,
 .hero-button:focus {
   color: var(--title-text-color);
   background-color: var(--second-background-color);
 }
+/* backdrop */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdrop-bg-color);
+
+  opacity: 1;
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.modal {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-height: 581px;
+  min-width: 528px;
+  padding: 15px;
+
+  background-color: var(--primary-white-color);
+
+  transform: translate(-50%, -50%) scale(1);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--primary-white-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 /* <!-- Feature --> */
 
 .feature-section {
@@ -267,6 +350,7 @@ nav {
 }
 
 /* Work */
+
 .work-section {
   padding-bottom: 94px;
 }
@@ -275,9 +359,32 @@ nav {
 }
 .work-list-item {
   width: 370px;
+  display: block;
+
+  position: relative;
 }
 .work-list-item:not(:nth-child(3n)) {
   margin-right: 30px;
+}
+
+.work-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+
+  background: var(--work-label-background);
+}
+.work-label .title {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.14;
+  text-transform: uppercase;
+  color: var(--primary-white-color);
 }
 /* .work-list .grid {
   --number: 4;
@@ -349,6 +456,9 @@ nav {
   justify-content: center;
   align-items: center;
   color: var(--social-links-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .team-list .title {
   color: var(--title-text-color);
@@ -393,6 +503,9 @@ nav {
   color: var(--social-links-color);
   border: 1px solid var(--social-links-color);
   border-radius: 4px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .client-link-icon {
   fill: currentColor;
@@ -424,8 +537,10 @@ address {
 .f-mail-tel {
   display: inline-block;
   margin-top: 9px;
-  color: var(--opasity-lite-color);
+  color: var(--opasity-light-color);
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .f-mail-tel:hover,
 .f-mail-tel:focus {
@@ -459,6 +574,8 @@ address {
   border-radius: 50%;
   color: var(--primary-white-color);
   background-color: var(--opasity-dark-color);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .f-social-item + .f-social-item {
   margin-left: 10px;
@@ -502,6 +619,10 @@ address {
   text-align: center;
   letter-spacing: 0.03em;
   cursor: pointer;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .port-button:hover,
 .port-button:focus {
@@ -542,6 +663,8 @@ address {
 .portfolio-link {
   display: block;
   text-decoration: none;
+
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .portfolio-link:hover,
 .portfolio-link:focus {
@@ -565,6 +688,42 @@ address {
   /* identical to box height, or 200% */
   letter-spacing: 0.06em;
 }
+
+.portfolio-thumb {
+  display: block;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 24px;
+
+  background-color: var(--port-overlay-color);
+
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--primary-white-color);
+
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-link:hover .portfolio-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 .portfolio-text {
   padding: 20px 24px;
 
